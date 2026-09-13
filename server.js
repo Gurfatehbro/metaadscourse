@@ -14,13 +14,35 @@ const razorpay = new Razorpay({
   key_secret: RZP_KEY_SECRET
 });
 
-const ORDERS_FILE = path.join(__dirname, 'orders.json');
-if (!fs.existsSync(ORDERS_FILE)) {
-  fs.writeFileSync(ORDERS_FILE, JSON.stringify([], null, 2));
+const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const ORDERS_FILE = isVercel 
+  ? path.join('/tmp', 'orders.json') 
+  : path.join(__dirname, 'orders.json');
+
+function initOrdersFile() {
+  try {
+    if (!fs.existsSync(ORDERS_FILE)) {
+      const seedFile = path.join(__dirname, 'orders.json');
+      if (isVercel && fs.existsSync(seedFile)) {
+        try {
+          const content = fs.readFileSync(seedFile, 'utf8');
+          fs.writeFileSync(ORDERS_FILE, content);
+          return;
+        } catch (e) {}
+      }
+      fs.writeFileSync(ORDERS_FILE, JSON.stringify([], null, 2));
+    }
+  } catch (err) {
+    console.error('Orders file init note:', err.message);
+  }
 }
+initOrdersFile();
 
 function readOrders() {
   try {
+    if (!fs.existsSync(ORDERS_FILE)) {
+      initOrdersFile();
+    }
     const data = fs.readFileSync(ORDERS_FILE, 'utf8');
     return JSON.parse(data || '[]');
   } catch (e) {
@@ -29,7 +51,11 @@ function readOrders() {
 }
 
 function saveOrders(orders) {
-  fs.writeFileSync(ORDERS_FILE, JSON.stringify(orders, null, 2));
+  try {
+    fs.writeFileSync(ORDERS_FILE, JSON.stringify(orders, null, 2));
+  } catch (err) {
+    console.error('Failed to save orders:', err.message);
+  }
 }
 
 const MIME_TYPES = {
@@ -48,6 +74,16 @@ const MIME_TYPES = {
 
 function parseBody(req) {
   return new Promise((resolve, reject) => {
+    if (req.body) {
+      if (typeof req.body === 'object') return resolve(req.body);
+      if (typeof req.body === 'string') {
+        try {
+          return resolve(JSON.parse(req.body));
+        } catch (e) {
+          return resolve({});
+        }
+      }
+    }
     let body = '';
     req.on('data', chunk => (body += chunk));
     req.on('end', () => {
@@ -61,7 +97,7 @@ function parseBody(req) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
+async function serverHandler(req, res) {
   const urlParts = req.url.split('?');
   const reqPath = urlParts[0];
 
@@ -290,14 +326,17 @@ const server = http.createServer(async (req, res) => {
         res.writeHead(500);
         res.end('500 Server Error: ' + err.code);
       }
-    } else {
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content);
     }
   });
-});
+}
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
-  console.log(`Admin portal available at http://localhost:${PORT}/adminai`);
-});
+const server = http.createServer(serverHandler);
+
+if (require.main === module && !process.env.VERCEL) {
+  server.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/`);
+    console.log(`Admin portal available at http://localhost:${PORT}/adminai`);
+  });
+}
+
+module.exports = serverHandler;
