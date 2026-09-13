@@ -261,9 +261,16 @@ function initCheckoutModal() {
           body: JSON.stringify({ name, number: phone, email })
         });
 
-        const orderData = await orderRes.json();
+        let orderData;
+        const resText = await orderRes.text();
+        try {
+          orderData = JSON.parse(resText);
+        } catch (parseErr) {
+          console.error('Non-JSON response from /api/create-order:', resText);
+          throw new Error('Server busy or updating. Please try again in a moment.');
+        }
 
-        if (!orderData.success || !orderData.order_id) {
+        if (!orderRes.ok || !orderData.success || !orderData.order_id) {
           throw new Error(orderData.error || 'Unable to generate Razorpay order ID');
         }
 
@@ -302,7 +309,13 @@ function initCheckoutModal() {
                 })
               });
 
-              const verifyData = await verifyRes.json();
+              let verifyData;
+              const vText = await verifyRes.text();
+              try {
+                verifyData = JSON.parse(vText);
+              } catch (vpErr) {
+                verifyData = { success: false, error: 'Verification response parsing failed' };
+              }
 
               if (verifyData.success) {
                 formContent.style.display = 'none';
