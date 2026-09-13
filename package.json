@@ -2,7 +2,6 @@
   "name": "meta-ads-course",
   "version": "1.0.0",
   "description": "Meta Ads Crash Course 2026 - High Converting Product Page & Admin Portal with Razorpay Live",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
