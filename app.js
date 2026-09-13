@@ -26,6 +26,11 @@ function init3DTilt() {
 
   if (!scene || !book) return;
 
+  // Only enable 3D mouse tracking on desktop devices with hover support
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    return;
+  }
+
   scene.addEventListener('mousemove', (e) => {
     const rect = scene.getBoundingClientRect();
     const x = e.clientX - rect.left;
