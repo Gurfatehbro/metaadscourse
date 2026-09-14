@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Successful! Download Your Course — Meta Ads Store</title>
-  <meta name="description" content="Thank you for your purchase! Access and download your 28-Page Mastering Facebook Ads PDF Playbook.">
+  <title>Verifying Payment Access — Meta Ads Store</title>
+  <meta name="description" content="Access verification and delivery for Mastering Facebook Ads PDF Playbook.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
@@ -20,13 +20,6 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '1998153387510750');
   fbq('track', 'PageView');
-  fbq('track', 'Purchase', {
-    content_name: 'Mastering Facebook Ads (28-Page PDF Playbook)',
-    content_category: 'E-Book / Course',
-    content_type: 'product',
-    value: 249.00,
-    currency: 'INR'
-  });
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1998153387510750&ev=PageView&noscript=1"
@@ -34,6 +27,36 @@
   <!-- End Meta Pixel Code -->
 
   <style>
+    /* Security Gate Loader */
+    #securityGate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .security-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(0, 129, 251, 0.2);
+      border-top-color: var(--meta-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Content is completely hidden until cryptographically verified */
+    #unlockedContent {
+      display: none;
+    }
+
     .success-page-container {
       max-width: 1040px;
       margin: 40px auto 80px;
@@ -250,10 +273,6 @@
       text-decoration: none;
     }
 
-    .support-box a:hover {
-      text-decoration: underline;
-    }
-
     @media (max-width: 768px) {
       .pdf-frame-wrapper {
         height: 520px;
@@ -284,27 +303,34 @@
     </div>
   </header>
 
-  <!-- UNLOCKED SUCCESS CONTENT (Directly Accessible) -->
-  <main class="success-page-container">
+  <!-- SECURITY GATE / ACCESS VERIFIER -->
+  <div id="securityGate">
+    <div class="security-spinner"></div>
+    <h2 style="font-family: var(--font-display); color: #fff; margin-bottom: 8px;">Verifying Payment Access...</h2>
+    <p style="color: var(--text-secondary); font-size: 0.95rem;">Checking confirmed payment and cryptographically authenticating your license.</p>
+  </div>
+
+  <!-- UNLOCKED CONTENT (ONLY DISPLAYED IF PAYMENT IS VALID & CONFIRMED) -->
+  <main class="success-page-container" id="unlockedContent">
 
     <!-- HERO / CONFIRMATION CARD -->
     <div class="success-hero-card">
       <div class="success-check-3d">✓</div>
-      <div class="order-status-pill">⚡ Order Confirmed & Access Granted</div>
+      <div class="order-status-pill">⚡ Verified Paid Order & Access Granted</div>
       <h1 class="success-title">Payment <span>Successful!</span></h1>
       <p class="success-desc">
-        Congratulations! Your transaction is verified. You now have full access to the complete <strong>28-Page Mastering Facebook Ads Playbook</strong>. Read it directly below or download it to your device.
+        Congratulations! Your payment has been confirmed. You now have full access to the <strong>28-Page Mastering Facebook Ads Playbook</strong>. Read it directly below or download it to your device.
       </p>
 
       <!-- RECEIPT SUMMARY -->
       <div class="receipt-grid">
         <div class="receipt-item">
           <label>Order Reference</label>
-          <span id="displayOrderId">META-ORD-2026-LIVE</span>
+          <span id="displayOrderId">--</span>
         </div>
         <div class="receipt-item">
-          <label>Payment Status</label>
-          <span id="displayPaymentId" style="color: var(--neon-emerald);">Verified & Paid ✅</span>
+          <label>Payment ID</label>
+          <span id="displayPaymentId">--</span>
         </div>
         <div class="receipt-item">
           <label>Product</label>
@@ -318,10 +344,10 @@
 
       <!-- MAIN ACTION BUTTONS -->
       <div class="action-button-group">
-        <a href="assets/Mastering_Facebook_Ads.pdf" download="Mastering_Facebook_Ads_Guide.pdf" class="btn-download-pdf btn-shine" id="mainDownloadBtn">
+        <a href="#" download="Mastering_Facebook_Ads_Guide.pdf" class="btn-download-pdf btn-shine" id="mainDownloadBtn">
           <span>📥 Download PDF Playbook (Save File)</span>
         </a>
-        <a href="assets/Mastering_Facebook_Ads.pdf" target="_blank" class="btn-view-pdf" id="openFullscreenBtn">
+        <a href="#" target="_blank" class="btn-view-pdf" id="openFullscreenBtn">
           <span>↗ Open in Full Screen Tab</span>
         </a>
       </div>
@@ -334,7 +360,7 @@
           <span>📖</span>
           <span>Your Playbook: Mastering Facebook Ads (28 Pages)</span>
         </div>
-        <a href="assets/Mastering_Facebook_Ads.pdf" download="Mastering_Facebook_Ads_Guide.pdf" class="pdp-cart-pill" style="text-decoration: none; cursor: pointer;">
+        <a href="#" download="Mastering_Facebook_Ads_Guide.pdf" class="pdp-cart-pill" id="headerDownloadLink" style="text-decoration: none; cursor: pointer;">
           ⬇ Instant Download Link
         </a>
       </div>
@@ -343,13 +369,12 @@
       <div class="pdf-frame-wrapper">
         <iframe
           id="pdfIframe"
-          src="assets/Mastering_Facebook_Ads.pdf#toolbar=1"
+          src="about:blank"
           class="pdf-frame"
           title="Mastering Facebook Ads PDF Preview"
         >
           <p style="padding: 20px; color: #fff; text-align: center;">
-            Your browser does not support embedded PDF reading.
-            <a href="assets/Mastering_Facebook_Ads.pdf" style="color: #0081fb;">Click here to download the PDF</a>.
+            Your browser does not support embedded PDF reading. Please click the Download button above.
           </p>
         </iframe>
       </div>
@@ -364,29 +389,98 @@
   </main>
 
   <script>
-    // Read URL Parameters if provided, otherwise keep default confirmed display
-    const params = new URLSearchParams(window.location.search);
-    const orderId = params.get('order_id');
-    const paymentId = params.get('payment_id');
+    (async function verifyAccessAndUnlock() {
+      const securityGate = document.getElementById('securityGate');
+      const unlockedContent = document.getElementById('unlockedContent');
 
-    if (orderId) {
-      document.getElementById('displayOrderId').textContent = orderId;
-    }
-    if (paymentId) {
-      document.getElementById('displayPaymentId').textContent = paymentId;
-    }
+      // 1. Retrieve credentials from URL or SessionStorage
+      const params = new URLSearchParams(window.location.search);
+      let orderId = params.get('order_id');
+      let paymentId = params.get('payment_id');
+      let token = params.get('token');
 
-    // Auto-trigger file download once after 1.5 seconds if query params exist
-    if (orderId || paymentId) {
-      setTimeout(() => {
-        const dlLink = document.createElement('a');
-        dlLink.href = 'assets/Mastering_Facebook_Ads.pdf';
-        dlLink.download = 'Mastering_Facebook_Ads_Guide.pdf';
-        document.body.appendChild(dlLink);
-        dlLink.click();
-        document.body.removeChild(dlLink);
-      }, 1500);
-    }
+      // Fallback to session if parameters not in URL
+      if (!orderId || !paymentId || !token) {
+        try {
+          const saved = JSON.parse(sessionStorage.getItem('meta_paid_access') || '{}');
+          if (saved.order_id && saved.payment_id && saved.token) {
+            orderId = saved.order_id;
+            paymentId = saved.payment_id;
+            token = saved.token;
+          }
+        } catch (e) {}
+      }
+
+      // If no valid payment credentials, REDIRECT IMMEDIATELY to homepage
+      if (!orderId || !paymentId || !token) {
+        window.location.replace('/');
+        return;
+      }
+
+      try {
+        // 2. Validate cryptographic credentials with Backend
+        const verifyUrl = `/api/verify-access?order_id=${encodeURIComponent(orderId)}&payment_id=${encodeURIComponent(paymentId)}&token=${encodeURIComponent(token)}`;
+        const res = await fetch(verifyUrl);
+        const data = await res.json();
+
+        if (!res.ok || !data.valid) {
+          // If payment was not verified, lock out and kick back to home
+          alert('Access Denied: Please complete a valid payment first.');
+          window.location.replace('/');
+          return;
+        }
+
+        // 3. Payment Confirmed & Valid! Unlock Content
+        document.title = 'Payment Successful! Download Course — Meta Ads Store';
+        document.getElementById('displayOrderId').textContent = data.order.order_id || orderId;
+        document.getElementById('displayPaymentId').textContent = data.order.payment_id || paymentId;
+
+        // Secure download URL requiring verified token
+        const secureDownloadUrl = `/api/download?order_id=${encodeURIComponent(orderId)}&payment_id=${encodeURIComponent(paymentId)}&token=${encodeURIComponent(token)}`;
+        const secureViewUrl = secureDownloadUrl + '&view=1';
+
+        // Setup download and full-screen links
+        const downloadBtn = document.getElementById('mainDownloadBtn');
+        const fullscreenBtn = document.getElementById('openFullscreenBtn');
+        const headerDownload = document.getElementById('headerDownloadLink');
+        const pdfIframe = document.getElementById('pdfIframe');
+
+        downloadBtn.href = secureDownloadUrl;
+        fullscreenBtn.href = secureViewUrl;
+        headerDownload.href = secureDownloadUrl;
+        pdfIframe.src = secureViewUrl;
+
+        // Reveal content & hide security loader
+        securityGate.style.display = 'none';
+        unlockedContent.style.display = 'block';
+
+        // Meta Pixel Purchase Event Tracking
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'Purchase', {
+            content_name: 'Mastering Facebook Ads (28-Page PDF Playbook)',
+            content_category: 'E-Book / Course',
+            content_type: 'product',
+            value: 249.00,
+            currency: 'INR'
+          });
+        }
+
+        // Auto-trigger file download once after 1 second
+        setTimeout(() => {
+          const dlLink = document.createElement('a');
+          dlLink.href = secureDownloadUrl;
+          dlLink.download = 'Mastering_Facebook_Ads_Guide.pdf';
+          document.body.appendChild(dlLink);
+          dlLink.click();
+          document.body.removeChild(dlLink);
+        }, 1200);
+
+      } catch (err) {
+        console.error('Verification error:', err);
+        alert('Could not verify payment credentials. Redirecting to home...');
+        window.location.replace('/');
+      }
+    })();
   </script>
 </body>
 </html>
