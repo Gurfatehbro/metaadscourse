@@ -326,11 +326,6 @@ function initCheckoutModal() {
                 formContent.style.display = 'none';
                 successBox.style.display = 'block';
 
-                const licenseEl = document.getElementById('successLicenseKey');
-                if (licenseEl && verifyData.license_key) {
-                  licenseEl.textContent = verifyData.license_key;
-                }
-
                 // Trigger direct file download
                 triggerPdfDownload();
               } else {

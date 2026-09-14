@@ -578,7 +578,7 @@
       <div class="section-header">
         <div>
           <h3 class="section-title" id="sectionTitle">Verified Paid Orders</h3>
-          <p class="section-subtitle" id="sectionSubtitle">Customer name, mobile number, optional email, and digital license keys</p>
+          <p class="section-subtitle" id="sectionSubtitle">Customer name, mobile number, optional email, and payment receipt logs</p>
         </div>
         <div class="filter-bar">
           <input type="text" class="search-box" id="searchInput" placeholder="Search by name, number...">
@@ -687,9 +687,9 @@
 
         let csv = '';
         if (currentTab === 'paid') {
-          csv = 'Date,Customer Name,Phone Number,Email,Payment ID,Amount,Status,License Key\n';
+          csv = 'Date,Customer Name,Phone Number,Email,Payment ID,Amount,Status,Delivery\n';
           activeList.forEach(o => {
-            csv += `"${new Date(o.date).toLocaleString()}","${o.name || ''}","${o.number || ''}","${o.email || ''}","${o.payment_id || ''}","₹${o.amount || 249}","PAID","${o.license_key || ''}"\n`;
+            csv += `"${new Date(o.date).toLocaleString()}","${o.name || ''}","${o.number || ''}","${o.email || ''}","${o.payment_id || ''}","₹${o.amount || 249}","PAID","Instant Download"\n`;
           });
         } else {
           csv = 'Date,Customer Name,Phone Number,Email,Order ID,Amount,Status\n';
@@ -726,7 +726,7 @@
         tabPaidBtn.classList.add('active');
         tabAbandonedBtn.classList.remove('active');
         titleEl.textContent = 'Verified Paid Orders';
-        subtitleEl.textContent = 'Showing completed payments with license keys & receipt IDs';
+        subtitleEl.textContent = 'Showing completed payments & Razorpay receipt IDs';
         renderCurrentTable(allPaidOrders);
       } else {
         tabPaidBtn.classList.remove('active');
@@ -786,7 +786,7 @@
             <th>Payment ID</th>
             <th>Amount</th>
             <th>Status</th>
-            <th>License Key</th>
+            <th>PDF Delivery</th>
           </tr>
         `;
       } else {
@@ -837,7 +837,7 @@
               <td><span class="code-chip" style="color:#a855f7;">${escapeHtml(o.payment_id || '')}</span></td>
               <td><strong style="color:var(--neon-emerald);">₹${o.amount || 249}</strong></td>
               <td><span class="badge-paid">PAID</span></td>
-              <td><span class="code-chip" style="color:#38bdf8;">${escapeHtml(o.license_key || '')}</span></td>
+              <td><span class="code-chip" style="color:var(--neon-emerald);">⚡ Instant Download</span></td>
             </tr>
           `;
         }).join('');
