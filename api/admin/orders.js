@@ -29,10 +29,10 @@ module.exports = async function handler(req, res) {
     const rzpOrdersRes = await razorpay.orders.all({ count: 100 });
     const rzpItems = rzpOrdersRes.items || [];
 
-    // Filter for course orders (amount 24900 or customer notes present)
+    // Filter for course orders (amount 100 or 24900 or customer notes present)
     const courseOrders = rzpItems.filter(item => {
       const isCourseNote = item.notes && (item.notes.course || item.notes.customer_name);
-      return isCourseNote || item.amount === 24900;
+      return isCourseNote || item.amount === 100 || item.amount === 24900;
     });
 
     // 2. Read local orders (for payment_id, license keys, or offline entries)
@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
         id: item.id,
         order_id: item.id,
         payment_id: (localMatch && localMatch.payment_id) ? localMatch.payment_id : (isPaid ? 'RZP_PAID' : ''),
-        amount: (item.amount || 24900) / 100,
+        amount: item.amount ? (item.amount / 100) : (localMatch ? localMatch.amount : 1),
         status: isPaid ? 'PAID' : 'PENDING',
         name: (item.notes && item.notes.customer_name) ? item.notes.customer_name : ((localMatch && localMatch.name) ? localMatch.name : 'Customer'),
         number: (item.notes && item.notes.customer_number) ? item.notes.customer_number : ((localMatch && localMatch.number) ? localMatch.number : 'N/A'),

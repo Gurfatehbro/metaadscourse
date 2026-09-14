@@ -282,7 +282,7 @@ function initCheckoutModal() {
         // Step 2: Launch Razorpay Modal
         const options = {
           key: orderData.key_id || 'rzp_live_TbXpMHWLFUG29I',
-          amount: orderData.amount || 24900,
+          amount: orderData.amount || 100,
           currency: orderData.currency || 'INR',
           name: 'Meta Ads Store',
           description: 'Mastering Facebook Ads (28-Page PDF Playbook)',
@@ -336,7 +336,7 @@ function initCheckoutModal() {
               } else {
                 alert('Payment verification failed: ' + (verifyData.error || 'Please contact support.'));
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>🔒 Pay ₹249 & Get Instant Download (UPI / Cards)</span>';
+                submitBtn.innerHTML = '<span>🔒 Pay ₹1 & Get Instant Download (UPI / Cards)</span>';
               }
             } catch (vErr) {
               console.error('Verification Error:', vErr);
@@ -346,7 +346,7 @@ function initCheckoutModal() {
           modal: {
             ondismiss: function () {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = '<span>🔒 Pay ₹249 & Get Instant Download (UPI / Cards)</span>';
+              submitBtn.innerHTML = '<span>🔒 Pay ₹1 & Get Instant Download (UPI / Cards)</span>';
             }
           }
         };
@@ -355,7 +355,7 @@ function initCheckoutModal() {
         rzp.on('payment.failed', function (failedRes) {
           alert('Payment was not completed: ' + (failedRes.error.description || 'Cancelled'));
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>🔒 Pay ₹249 & Get Instant Download (UPI / Cards)</span>';
+          submitBtn.innerHTML = '<span>🔒 Pay ₹1 & Get Instant Download (UPI / Cards)</span>';
         });
         rzp.open();
 
@@ -363,7 +363,7 @@ function initCheckoutModal() {
         console.error('Razorpay Error:', err);
         alert('Could not start Razorpay: ' + err.message);
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>🔒 Pay ₹249 & Get Instant Download (UPI / Cards)</span>';
+        submitBtn.innerHTML = '<span>🔒 Pay ₹1 & Get Instant Download (UPI / Cards)</span>';
       }
     });
   }

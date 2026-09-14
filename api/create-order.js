@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
     const { name, number, email } = await parseBody(req);
 
     const options = {
-      amount: 24900, // 249.00 in paise
+      amount: 100, // 1.00 INR in paise for live testing
       currency: 'INR',
       receipt: `rcpt_${Date.now()}`,
       notes: {
@@ -36,7 +36,7 @@ module.exports = async function handler(req, res) {
     const pendingOrder = {
       id: `ord_${Date.now()}`,
       order_id: order.id,
-      amount: 249,
+      amount: 1,
       status: 'PENDING',
       name: (name || '').trim() || 'Anonymous',
       number: (number || '').trim() || 'N/A',
