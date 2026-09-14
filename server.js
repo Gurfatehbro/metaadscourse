@@ -34,6 +34,8 @@ async function serverHandler(req, res) {
     targetPath = '/index.html';
   } else if (targetPath === '/adminai' || targetPath === '/adminai/') {
     targetPath = '/adminai.html';
+  } else if (targetPath === '/success' || targetPath === '/success/') {
+    targetPath = '/success.html';
   }
 
   const filePath = path.join(__dirname, targetPath);

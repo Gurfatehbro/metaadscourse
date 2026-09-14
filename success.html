@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful! Download Your Course — Meta Ads Store</title>
+  <meta name="description" content="Thank you for your purchase! Access and download your 28-Page Mastering Facebook Ads PDF Playbook.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1998153387510750');
+  fbq('track', 'PageView');
+  fbq('track', 'Purchase', {
+    content_name: 'Mastering Facebook Ads (28-Page PDF Playbook)',
+    content_category: 'E-Book / Course',
+    content_type: 'product',
+    value: 249.00,
+    currency: 'INR'
+  });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1998153387510750&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    .success-page-container {
+      max-width: 1040px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+
+    .success-hero-card {
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 185, 129, 0.15);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+
+    .success-hero-card::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .order-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      margin-bottom: 20px;
+    }
+
+    .success-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .success-title span {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .success-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 620px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+
+    .receipt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
+      margin: 0 auto 30px;
+      text-align: left;
+      max-width: 780px;
+    }
+
+    .receipt-item label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .receipt-item span {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .action-button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .btn-download-pdf {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      transition: all var(--transition-smooth);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-download-pdf:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.55);
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+
+    .btn-view-pdf {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 16px 28px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all var(--transition-smooth);
+    }
+
+    .btn-view-pdf:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    /* PDF Viewer Container */
+    .pdf-viewer-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 40px;
+    }
+
+    .pdf-viewer-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .pdf-viewer-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pdf-frame-wrapper {
+      width: 100%;
+      height: 800px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #0b0f19;
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .support-box {
+      background: rgba(0, 129, 251, 0.06);
+      border: 1px solid rgba(0, 129, 251, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .support-box a {
+      color: var(--meta-blue);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .support-box a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .pdf-frame-wrapper {
+        height: 520px;
+      }
+      .success-hero-card {
+        padding: 30px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Clean Header Nav -->
+  <header class="pdp-header">
+    <div class="container pdp-nav">
+      <a href="/" class="pdp-brand">
+        <div class="pdp-logo-icon" title="Meta">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/>
+          </svg>
+        </div>
+        <span class="pdp-brand-text">META ADS <strong>STORE</strong></span>
+      </a>
+
+      <div class="pdp-nav-right">
+        <a href="/" class="btn-view-pdf" style="padding: 10px 20px; font-size: 0.88rem;">← Back to Store</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUCCESS CONTENT CONTAINER -->
+  <main class="success-page-container">
+
+    <!-- HERO / CONFIRMATION CARD -->
+    <div class="success-hero-card">
+      <div class="success-check-3d">✓</div>
+      <div class="order-status-pill">⚡ Order Confirmed & Access Granted</div>
+      <h1 class="success-title">Payment <span>Successful!</span></h1>
+      <p class="success-desc">
+        Congratulations! Your transaction has been verified. You now have instant access to the complete <strong>28-Page Mastering Facebook Ads Playbook</strong>. Read it directly below or download the file to your device.
+      </p>
+
+      <!-- RECEIPT SUMMARY -->
+      <div class="receipt-grid">
+        <div class="receipt-item">
+          <label>Order Reference</label>
+          <span id="displayOrderId">Processing...</span>
+        </div>
+        <div class="receipt-item">
+          <label>Payment ID</label>
+          <span id="displayPaymentId">Verified</span>
+        </div>
+        <div class="receipt-item">
+          <label>Product</label>
+          <span>Mastering Facebook Ads (28 Pages)</span>
+        </div>
+        <div class="receipt-item">
+          <label>Delivery</label>
+          <span style="color: var(--neon-emerald);">⚡ Instant Unlocked</span>
+        </div>
+      </div>
+
+      <!-- MAIN ACTION BUTTONS -->
+      <div class="action-button-group">
+        <a href="assets/Mastering_Facebook_Ads.pdf" download="Mastering_Facebook_Ads_Guide.pdf" class="btn-download-pdf btn-shine" id="mainDownloadBtn">
+          <span>📥 Download PDF Playbook (Save File)</span>
+        </a>
+        <a href="assets/Mastering_Facebook_Ads.pdf" target="_blank" class="btn-view-pdf">
+          <span>↗ Open in Full Screen Tab</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- EMBEDDED PDF SECTION -->
+    <section class="pdf-viewer-section">
+      <div class="pdf-viewer-header">
+        <div class="pdf-viewer-title">
+          <span>📖</span>
+          <span>Your Playbook: Mastering Facebook Ads (28 Pages)</span>
+        </div>
+        <a href="assets/Mastering_Facebook_Ads.pdf" download="Mastering_Facebook_Ads_Guide.pdf" class="pdp-cart-pill" style="text-decoration: none; cursor: pointer;">
+          ⬇ Instant Download Link
+        </a>
+      </div>
+
+      <!-- PDF FRAME -->
+      <div class="pdf-frame-wrapper">
+        <iframe
+          src="assets/Mastering_Facebook_Ads.pdf#toolbar=1"
+          class="pdf-frame"
+          title="Mastering Facebook Ads PDF Preview"
+        >
+          <p style="padding: 20px; color: #fff; text-align: center;">
+            Your browser does not support embedded PDF reading.
+            <a href="assets/Mastering_Facebook_Ads.pdf" style="color: #0081fb;">Click here to download the PDF</a>.
+          </p>
+        </iframe>
+      </div>
+    </section>
+
+    <!-- SUPPORT & CONTACT -->
+    <div class="support-box">
+      <p>💡 <strong>Note:</strong> Bookmark this page URL or save your PDF to your Google Drive / Phone files for offline reading anytime.</p>
+      <p style="margin-top: 8px;">Need any help or have a query? WhatsApp our support team directly or write to us anytime.</p>
+    </div>
+
+  </main>
+
+  <script>
+    // Read URL Parameters for receipt info
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order_id') || ('ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase());
+    const paymentId = params.get('payment_id') || 'pay_' + Math.random().toString(36).substr(2, 8);
+
+    const orderEl = document.getElementById('displayOrderId');
+    const payEl = document.getElementById('displayPaymentId');
+    if (orderEl) orderEl.textContent = orderId;
+    if (payEl) payEl.textContent = paymentId;
+
+    // Auto-trigger download once after 1 second
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = 'assets/Mastering_Facebook_Ads.pdf';
+        link.download = 'Mastering_Facebook_Ads_Guide.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

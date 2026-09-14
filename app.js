@@ -346,8 +346,13 @@ function initCheckoutModal() {
                   });
                 }
 
-                // Trigger direct file download
-                triggerPdfDownload();
+                // Redirect to dedicated /success page where PDF is embedded & downloaded
+                const orderId = (verifyData.order && verifyData.order.order_id) || response.razorpay_order_id || '';
+                const paymentId = response.razorpay_payment_id || '';
+                
+                setTimeout(() => {
+                  window.location.href = `/success?order_id=${encodeURIComponent(orderId)}&payment_id=${encodeURIComponent(paymentId)}`;
+                }, 400);
               } else {
                 alert('Payment verification failed: ' + (verifyData.error || 'Please contact support.'));
                 submitBtn.disabled = false;

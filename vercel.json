@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/adminai", "destination": "/adminai.html" }
+    { "source": "/adminai", "destination": "/adminai.html" },
+    { "source": "/success", "destination": "/success.html" }
   ]
 }
