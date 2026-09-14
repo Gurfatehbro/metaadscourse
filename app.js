@@ -221,6 +221,15 @@ function openCheckout() {
   if (successBox) successBox.style.display = 'none';
 
   if (modal) modal.classList.add('active');
+
+  // Meta Pixel InitiateCheckout Event Tracking
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'InitiateCheckout', {
+      content_name: 'Mastering Facebook Ads (28-Page PDF Playbook)',
+      value: 249.00,
+      currency: 'INR'
+    });
+  }
 }
 
 function initCheckoutModal() {
@@ -325,6 +334,17 @@ function initCheckoutModal() {
               if (verifyData.success) {
                 formContent.style.display = 'none';
                 successBox.style.display = 'block';
+
+                // Meta Pixel Purchase Event Tracking
+                if (typeof window.fbq === 'function') {
+                  window.fbq('track', 'Purchase', {
+                    content_name: 'Mastering Facebook Ads (28-Page PDF Playbook)',
+                    content_category: 'E-Book / Course',
+                    content_type: 'product',
+                    value: 249.00,
+                    currency: 'INR'
+                  });
+                }
 
                 // Trigger direct file download
                 triggerPdfDownload();
