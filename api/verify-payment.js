@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
         id: `ord_${Date.now()}`,
         payment_id: razorpay_payment_id,
         order_id: razorpay_order_id,
-        amount: 1,
+        amount: 249,
         status: 'PAID',
         name: name || 'Anonymous',
         number: number || 'N/A',

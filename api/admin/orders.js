@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
         id: item.id,
         order_id: item.id,
         payment_id: (localMatch && localMatch.payment_id) ? localMatch.payment_id : (isPaid ? 'RZP_PAID' : ''),
-        amount: item.amount ? (item.amount / 100) : (localMatch ? localMatch.amount : 1),
+        amount: item.amount ? (item.amount / 100) : (localMatch ? localMatch.amount : 249),
         status: isPaid ? 'PAID' : 'PENDING',
         name: (item.notes && item.notes.customer_name) ? item.notes.customer_name : ((localMatch && localMatch.name) ? localMatch.name : 'Customer'),
         number: (item.notes && item.notes.customer_number) ? item.notes.customer_number : ((localMatch && localMatch.number) ? localMatch.number : 'N/A'),
