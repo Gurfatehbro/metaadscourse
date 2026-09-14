@@ -346,13 +346,20 @@ function initCheckoutModal() {
                   });
                 }
 
-                // Redirect to dedicated /success page where PDF is embedded & downloaded
+                // Redirect to dedicated /success page with verified access token
                 const orderId = (verifyData.order && verifyData.order.order_id) || response.razorpay_order_id || '';
                 const paymentId = response.razorpay_payment_id || '';
+                const token = verifyData.access_token || '';
+
+                sessionStorage.setItem('meta_paid_access', JSON.stringify({
+                  order_id: orderId,
+                  payment_id: paymentId,
+                  token: token
+                }));
                 
                 setTimeout(() => {
-                  window.location.href = `/success?order_id=${encodeURIComponent(orderId)}&payment_id=${encodeURIComponent(paymentId)}`;
-                }, 400);
+                  window.location.href = `/success?order_id=${encodeURIComponent(orderId)}&payment_id=${encodeURIComponent(paymentId)}&token=${encodeURIComponent(token)}`;
+                }, 300);
               } else {
                 alert('Payment verification failed: ' + (verifyData.error || 'Please contact support.'));
                 submitBtn.disabled = false;
