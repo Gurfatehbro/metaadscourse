@@ -335,7 +335,7 @@ function initCheckoutModal() {
                 formContent.style.display = 'none';
                 successBox.style.display = 'block';
 
-                // Meta Pixel Purchase Event Tracking
+                // Meta Pixel Purchase Event Tracking (with eventID deduplication for CAPI)
                 if (typeof window.fbq === 'function') {
                   window.fbq('track', 'Purchase', {
                     content_name: 'Mastering Facebook Ads (28-Page PDF Playbook)',
@@ -343,7 +343,7 @@ function initCheckoutModal() {
                     content_type: 'product',
                     value: 249.00,
                     currency: 'INR'
-                  });
+                  }, { eventID: response.razorpay_order_id });
                 }
 
                 // Redirect to dedicated /success page with verified access token

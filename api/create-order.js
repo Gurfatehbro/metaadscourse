@@ -1,4 +1,4 @@
-const { razorpay, readOrders, saveOrders, parseBody, setCors, RZP_KEY_ID } = require('./_common.js');
+const { razorpay, readOrders, saveOrders, parseBody, setCors, RZP_KEY_ID, sendMetaCapiEvent } = require('./_common.js');
 
 module.exports = async function handler(req, res) {
   setCors(res);
@@ -47,6 +47,20 @@ module.exports = async function handler(req, res) {
     const orders = readOrders();
     orders.unshift(pendingOrder);
     saveOrders(orders);
+
+    // Send Server-Side InitiateCheckout Event via Meta Conversions API (CAPI)
+    sendMetaCapiEvent({
+      eventName: 'InitiateCheckout',
+      eventId: order.id,
+      email: email,
+      phone: number,
+      name: name,
+      amount: 249,
+      currency: 'INR',
+      customData: {
+        order_id: order.id
+      }
+    }, req).catch(err => console.error('Meta CAPI InitiateCheckout Error:', err.message));
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
