@@ -4,6 +4,7 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   init3DTilt();
   initGalleryTabs();
   initBuyButton();
@@ -26,8 +27,35 @@ function init3DTilt() {
 
   if (!scene || !book) return;
 
-  // Only enable 3D mouse tracking on desktop devices with hover support
+  // Enable touch interaction on mobile / touch screens
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    scene.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    scene.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        const deltaX = e.touches[0].clientX - touchStartX;
+        const deltaY = e.touches[0].clientY - touchStartY;
+        const rotY = -18 + deltaX * 0.35;
+        const rotX = Math.max(-15, Math.min(20, 8 - deltaY * 0.25));
+        book.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg) scale3d(1.02, 1.02, 1.02)`;
+      }
+    }, { passive: true });
+
+    scene.addEventListener('touchend', () => {
+      book.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+      book.style.transform = 'rotateY(-18deg) rotateX(8deg) scale3d(1, 1, 1)';
+      setTimeout(() => {
+        book.style.transition = '';
+      }, 350);
+    });
     return;
   }
 
@@ -411,3 +439,40 @@ function triggerPdfDownload() {
   link.click();
   document.body.removeChild(link);
 }
+
+/* ==========================================================================
+   8. THEME TOGGLE (LIGHT / DARK)
+   ========================================================================== */
+function initThemeToggle() {
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  const toggleIcon = document.getElementById('themeToggleIcon');
+  const toggleText = document.getElementById('themeToggleText');
+
+  function updateToggleUI(theme) {
+    if (!toggleIcon || !toggleText || !toggleBtn) return;
+    if (theme === 'dark') {
+      toggleIcon.textContent = '☀️';
+      toggleText.textContent = 'Light';
+      toggleBtn.setAttribute('title', 'Switch to Light theme');
+    } else {
+      toggleIcon.textContent = '🌙';
+      toggleText.textContent = 'Dark';
+      toggleBtn.setAttribute('title', 'Switch to Dark theme');
+    }
+  }
+
+  // Read current theme (default is light)
+  let currentTheme = localStorage.getItem('pdp_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateToggleUI(currentTheme);
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('pdp_theme', currentTheme);
+      updateToggleUI(currentTheme);
+    });
+  }
+}
+

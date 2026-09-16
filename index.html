@@ -25,6 +25,13 @@
   src="https://www.facebook.com/tr?id=1998153387510750&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+  <!-- Theme Initialization (Defaults to Light) -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('pdp_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 </head>
 <body>
 
@@ -50,6 +57,10 @@
 
       <div class="pdp-nav-right">
         <span class="pdp-badge-guarantee">⚡ Instant PDF Download</span>
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
+          <span class="theme-toggle-icon" id="themeToggleIcon">🌙</span>
+          <span class="theme-toggle-text" id="themeToggleText">Dark</span>
+        </button>
         <span class="pdp-cart-pill">🛒 Digital Delivery</span>
       </div>
     </div>

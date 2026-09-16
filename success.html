@@ -24,7 +24,13 @@
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1998153387510750&ev=PageView&noscript=1"
   /></noscript>
-  <!-- End Meta Pixel Code -->
+  <!-- Theme Initialization (Defaults to Light) -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('pdp_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 
   <style>
     /* Security Gate Loader */
@@ -64,12 +70,12 @@
     }
 
     .success-hero-card {
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%);
+      background: var(--bg-card);
       border: 1px solid rgba(16, 185, 129, 0.35);
       border-radius: var(--radius-xl);
       padding: 40px 32px;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 185, 129, 0.15);
+      box-shadow: var(--shadow-card);
       position: relative;
       overflow: hidden;
       margin-bottom: 36px;
@@ -83,7 +89,7 @@
       transform: translateX(-50%);
       width: 320px;
       height: 320px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
       filter: blur(40px);
       pointer-events: none;
     }
@@ -92,9 +98,9 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      color: #34d399;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--neon-emerald);
       font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -108,12 +114,12 @@
       font-family: var(--font-display);
       font-size: clamp(1.8rem, 4vw, 2.6rem);
       font-weight: 700;
-      color: #fff;
+      color: var(--text-primary);
       margin-bottom: 12px;
     }
 
     .success-title span {
-      background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -130,7 +136,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
-      background: rgba(0, 0, 0, 0.35);
+      background: var(--bg-muted);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       padding: 18px 24px;
@@ -193,7 +199,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--bg-muted);
       color: var(--text-primary);
       font-family: var(--font-display);
       font-size: 1rem;
@@ -201,14 +207,14 @@
       padding: 16px 28px;
       border-radius: var(--radius-md);
       text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--border-subtle);
       transition: all var(--transition-smooth);
     }
 
     .btn-view-pdf:hover {
-      background: rgba(255, 255, 255, 0.14);
-      border-color: rgba(255, 255, 255, 0.3);
-      color: #fff;
+      background: var(--bg-card-hover);
+      border-color: var(--border-strong);
+      color: var(--text-primary);
     }
 
     /* PDF Viewer Container */
@@ -236,7 +242,7 @@
       font-family: var(--font-display);
       font-size: 1.25rem;
       font-weight: 700;
-      color: #fff;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -306,7 +312,7 @@
   <!-- SECURITY GATE / ACCESS VERIFIER -->
   <div id="securityGate">
     <div class="security-spinner"></div>
-    <h2 style="font-family: var(--font-display); color: #fff; margin-bottom: 8px;">Verifying Payment Access...</h2>
+    <h2 style="font-family: var(--font-display); color: var(--text-primary); margin-bottom: 8px;">Verifying Payment Access...</h2>
     <p style="color: var(--text-secondary); font-size: 0.95rem;">Checking confirmed payment and cryptographically authenticating your license.</p>
   </div>
 
